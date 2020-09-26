@@ -69,3 +69,32 @@ def peptideToARN(peptide):
 arn = peptideToARN('ATVEKGGKHKTGPNEKGKKIFVQKCSQCHTVLHGLFGRKTGQA')
 print (arn)
 ```
+
+## RETO III
+
+**_En muchos de los genes codificados en el ADN existe un motivo recurrente ubicado_**
+**_antes de la secuencia codificante del gen que direcciona la unión de la_**
+**_ARN Polimerasa II, la proteína encargada de copiar el ADN a un ARN mensajero._**
+**_Ésta secuencia denominada caja TATA (consistente en una secuencia de nucleótidos 'TATAAA')_**
+**_se encuentra presente en lo que se denomina región promotora de diversos genes,_**
+**_en organismos de todos los reinos (Smaleand Kadonaga 2003; Lifton  et al. 1978)._**
+
+**_Crea un programa sencillo en algún lenguaje de programación que conozcas que permita_**
+**_identificar las regiones promotoras de un gen, en una secuencia dada de ADN,_**
+**_considerando que tal región comienza y termina con la caja TATA._**
+
+```py
+def genesFromTATA(adnSequence):
+  return list(filter(None, adnSequence.split('TATAAA')))
+```
+
+## RETO VI
+
+**_Existen numerosas herramientas muy fáciles de usar que te permiten crear videojuegos,_**
+**_como por ejemplo PilasEngine y no hay mejor modo de aprender que jugando!_**
+
+**_Diseñá un juego de mesa o un videojuego (hecho con la herramienta que más te guste)_**
+**_temático sobre expresión génica, con sus reglas y resúmen. Tené en cuenta que lo vas_**
+**_a tener que compartir con la clase. ¡El cielo es límite, a divertirse!_**
+
+[Link al Juego](https://app.pilas-engine.com.ar/#/proyecto/94601b14-b1a9-413f-a598-809992356942)
