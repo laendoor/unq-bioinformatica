@@ -97,4 +97,4 @@ def genesFromTATA(adnSequence):
 **_temático sobre expresión génica, con sus reglas y resúmen. Tené en cuenta que lo vas_**
 **_a tener que compartir con la clase. ¡El cielo es límite, a divertirse!_**
 
-[Link al Juego](https://app.pilas-engine.com.ar/#/proyecto/94601b14-b1a9-413f-a598-809992356942)
+[Repo del Juego](https://github.com/unq-bio-dilosaba/rna-proteins-game)
