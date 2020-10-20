@@ -224,9 +224,115 @@ que se podría utilizar el scoring previo calculado para otra cadena.
 **_Interpretando la recursión, explicá con tus palabras de dónde salen los valores de la matriz_**
 **_que se construye. ¡Esquematiza tus conclusiones!_**
 
-Los valores de la matriz salen de calcular 
+Los valores de la matriz salen de calcular:
+
+La celda `D{0}{0}` arranca en `0` por ser ambos _gaps_.
+Luego, toda la fila `D{0}` tiene un score `-2` porque un _gap_ es distinto a cualquier valor, pero
+además se le va restando el máximo de las celdas adyacentes, que en este caso es simplemente la
+de la izquierda.
+
+El resto de las celdas se completan según la regla
+
+![TP5-matriz](img/TP5-matriz.png)
+
+Darle una "penalidad positiva" al _gap_ genera que siempre convenga _matchear_ con el gap,
+generando un recorrido matricial de forma de L invertida.
+
+Por el contrario, darle "penalidad positiva" al mismatch genera que se vayan generando
+distintos alineamientos. Pero esto está muy relacionado a cómo son las cadenas que se está comparando.
 
 ### PARA PENSAR
 
 **_¿En qué casos serán de utilidad uno u otro tipo de alineamientos?_**
 **_¿Qué limitaciones tendrá cada uno?_**
+
+- El alineamiento global es útil cuando se
+comparan secuencias muy similares en tamaño y composición, por
+ejemplo de dos genes muy conservados.
+
+- El alineamiento local cuando interesa alinear regiones similares entre
+secuencias. Es útil cuando las secuencias a comparar son
+diferentes en tamaño o poseen regiones no conservadas
+
+### PARA PENSAR
+
+**_Ingresá al servidor del NCBI y mirá los distintos programas_**
+**_derivados del BLAST que se ofrecen_**
+**_¿Para qué sirve cada uno? ¿En qué casos usarías cada uno?_**
+
+Existen 4 programas de BLAST que ofrecen diferentes alineamientos
+
+- Nucléotido con Nucleótido
+- Nucleótido Traducido a Proteína
+- Proteína a Nucléotido traducido
+- Proteíana a Proteína
+
+## RETO VII
+
+**_Calculá el E-value y porcentaje de identidad utilizando el_**
+**_programa BLAST de la siguiente secuencia input usando 20000 hits,_**
+**_un e-value de 100 y tomando aquellos hits con un mínimo de 70% cobertura._**
+**_Observe y discuta el comportamiento de:_**
+**_E-value vs. % id, Score vs % id, Score vs E-value_**
+
+> VVGGLGGYMLGSAMSRPIIHFGSDYEDRYYRENMHRYPNQVYYRPMDEYSNQNNFVHDCVNITIKQHTVTTTTKGENFTETDVKMMERVVEQMCITQYERESQAYYQRGSSMVLFSSPPVILLISFLIFLIVG
+
+Mejor _e-value_: unnamed protein product [Homo sapiens] `4e-95`
+
+![TP5-reto-vii-e-value.png](img/TP5-reto-vii-e-value.png)
+
+![TP5-reto-vii-graph.png](img/TP5-reto-vii-graph.png)
+
+El _E-Value_ es el valor que determina el margen de error en cuanto a coincidencias
+de alineamiento. En comparación, el `%id` determina el porcentaje de identidad
+con el alineamiento comparado con las de la base
+El Score es un porcentaje que se obtiene analizando el resto de los resultados
+y tratando de obtener un valor que de una revisión general de cuán buena es la coincidencia.
+A diferencia del `%id` contempla todos los resultados.
+En el Score vs _E-Value_ se muestra una "especie de promedio" contra el margen de error
+en el alineamiento.
+
+## RETO VIII
+
+**_Realizá nuevas búsquedas usando la mitad de la_**
+**_secuencia problema y para un cuarto de la secuencia original. Compará_**
+**_los gráficos obtenidos. ¿Qué conclusiones puede sacas?_**
+
+Para la mitad de la secuencia, o sea:
+
+> VVGGLGGYMLGSAMSRPIIHFGSDYEDRYYRENMHRYPNQVYYRPMDEYSNQNNFVHDCVNITIKQH
+
+Mejor _e-value_:  Chain A, Major prion protein [Homo sapiens] `2e-43`
+
+![TP5-reto-viii-e-value.png](img/TP5-reto-viii-e-value.png)
+
+![TP5-reto-viii-graph.png](img/TP5-reto-viii-graph.png)
+
+Para un cuarto de la secuencia, o sea:
+
+> VVGGLGGYMLGSAMSRPIIHFGSDYEDRYYRENM
+
+Mejor _e-value_: Chain A, MAJOR PRION PROTEIN [Homo sapiens] `9e-16`
+
+![TP5-reto-viii-e-value-25.png](img/TP5-reto-viii-e-value-25.png)
+
+![TP5-reto-viii-graph-25.png](img/TP5-reto-viii-graph-25.png)
+
+Como conclusión podría decirse que al tener una secuencia con menor
+cantidad de aminoácidos existen más posibilidades de encontrar alineamientos,
+pero eso no garantiza que esos alineamientos sean totales sino que hay un mejor
+alineamiendo en forma parcial.
+
+Por ejemplo, la secuencia de un cuarto puede alinear mejor con otra sobre
+"el principio" de otra, sobre "el final" o sobre alguna "parte intermedia".
+
+## RETO X
+
+**_Realizá una nueva corrida del BLASTp, utilizando la misma_**
+**_secuencia , pero ahora contra la base de datos PDB. ¿Se obtienen los_**
+**_mismo resultados? ¿Qué tipo de resultados(hits) se recuperan?_**
+**_¿Cuándo nos podría ser útil este modo de corrida?_**
+
+Los resultados (si no hice mal las mediciones previas) parecieran ser similares.
+Sí la diferencia es que con _pdb_ se encuentran algunos mejor resultados que con
+_non-redundant_.
